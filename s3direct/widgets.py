@@ -54,7 +54,7 @@ class S3DirectWidget(widgets.TextInput):
 			element_id=self.build_attrs(attrs).get('id'),
 			file_name=os.path.basename(value or ''),
 			upload_to=self.upload_to,
-			file_url=self._get_signed_url(key),
+			file_url=key,
 			name=name)
 
 		return mark_safe(output)
