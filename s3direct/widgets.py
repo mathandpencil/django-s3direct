@@ -52,7 +52,7 @@ class S3DirectWidget(widgets.TextInput):
 		output = self.html.format(
 			policy_url=reverse('s3direct'),
 			element_id=self.build_attrs(attrs).get('id'),
-			file_name=os.path.basename(file_name or ''),
+			file_name=os.path.basename(key or ''),
 			upload_to=self.upload_to,
 			file_url=self._get_signed_url(key),
 			name=name)
