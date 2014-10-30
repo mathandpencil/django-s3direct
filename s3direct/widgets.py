@@ -14,7 +14,7 @@ class S3DirectWidget(widgets.TextInput):
 	html = (
 		'<div class="s3direct" data-policy-url="{policy_url}">'
 		'  <a class="file-link" target="_blank" href="{file_url}">{file_name}</a>'
-		'  <a class="file-remove" href="#remove">Remove</a>'
+		'  <a class="file-remove" href="#remove">Add/Update/Remove PDF</a>'
 		'  <input class="file-url" type="hidden" value="{file_url}" id="{element_id}" name="{name}" />'
 		'  <input class="file-upload-to" type="hidden" value="{upload_to}">'
 		'  <input class="file-input" type="file" />'
@@ -48,14 +48,11 @@ class S3DirectWidget(widgets.TextInput):
 
 	def render(self, name, value, attrs=None):
 		file_name = os.path.basename(value or '')
-		key = '%s/%s' % (self.upload_to, file_name)
-		
-		print 
-		
+		key = '%s/%s' % (self.upload_to, file_name)		
 		output = self.html.format(
 			policy_url=reverse('s3direct'),
 			element_id=self.build_attrs(attrs).get('id'),
-			file_name=key,
+			file_name=os.path.basename(file_name or ''),
 			upload_to=self.upload_to,
 			file_url=self._get_signed_url(key),
 			name=name)
