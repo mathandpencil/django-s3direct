@@ -48,11 +48,12 @@ class S3DirectWidget(widgets.TextInput):
 
 	def render(self, name, value, attrs=None):
 		file_name = os.path.basename(value or '')
-		key = '%s/%s' % (self.upload_to, file_name)		
+		key = '%s/%s' % (self.upload_to, file_name)	
+		print '---> ', value	
 		output = self.html.format(
 			policy_url=reverse('s3direct'),
 			element_id=self.build_attrs(attrs).get('id'),
-			file_name=os.path.basename(key or ''),
+			file_name=os.path.basename(value or ''),
 			upload_to=self.upload_to,
 			file_url=self._get_signed_url(key),
 			name=name)
