@@ -13,7 +13,7 @@ class S3DirectWidget(widgets.TextInput):
 
 	html = (
 		'<div class="s3direct" data-policy-url="{policy_url}">'
-		'  <a class="file-link" target="_blank" href="{file_url}">{file_name}</a>'
+		'  <a class="file-link" target="_blank" href="{file_url}" data-signed-url="{signed_url}">{file_name}</a>'
 		'  <a class="file-remove" href="#remove">Add/Update/Remove PDF</a>'
 		'  <input class="file-url" type="hidden" value="{file_url}" id="{element_id}" name="{name}" />'
 		'  <input class="file-upload-to" type="hidden" value="{upload_to}">'
@@ -60,7 +60,8 @@ class S3DirectWidget(widgets.TextInput):
 			element_id=self.build_attrs(attrs).get('id'),
 			file_name=file_name,
 			upload_to=self.upload_to,
-			file_url=self._get_signed_url(key),
+			file_url=key,
+			signed_url = self._get_signed_url(key),
 			name=name)
 
 		return mark_safe(output)
