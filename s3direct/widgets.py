@@ -50,14 +50,14 @@ class S3DirectWidget(widgets.TextInput):
 		file_name = os.path.basename(value or '')
 		key = '%s/%s' % (self.upload_to, file_name)
 		
-		print self._get_signed_url(key)
+		print 
 		
 		output = self.html.format(
 			policy_url=reverse('s3direct'),
 			element_id=self.build_attrs(attrs).get('id'),
-			file_name=os.path.basename(value or ''),
+			file_name=key,
 			upload_to=self.upload_to,
-			file_url=key,
+			file_url=self._get_signed_url(key),
 			name=name)
 
 		return mark_safe(output)
