@@ -41,7 +41,7 @@ class S3DirectWidget(widgets.TextInput):
 		
 	def _get_signed_url(self, file_name):
 		conn 		= boto.connect_s3(settings.AWS_ACCESS_KEY_ID, settings.AWS_SECRET_ACCESS_KEY)	
-		bucket		= conn.get_bucket(settings.AWS_STORAGE_BUCKET_NAME)
+		bucket		= conn.get_bucket(settings.AWS_STORAGE_BUCKET_NAME, validate=False)
 		key 		= boto.s3.key.Key(bucket)
 		key.name 	= file_name
 		return key.generate_url(expires_in=60*60*60, force_http=True)
