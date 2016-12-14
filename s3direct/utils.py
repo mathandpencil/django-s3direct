@@ -61,7 +61,8 @@ def create_upload_data(content_type, source_filename, upload_to):
 
     key = '%s/%s' % (upload_to, filename)
     bucket_url = 'https://%s/%s' % (endpoint, bucket)
-
+    
+    print '[django-s3direct] create_upload_data {}'.format(key)
     return {
         "policy": policy.decode(),
         "signature": signature_b64.decode(),
