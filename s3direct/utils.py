@@ -60,7 +60,7 @@ def create_upload_data(content_type, source_filename, upload_to):
         filename = '%s.%s' % (uuid.uuid4(), ext)
     else:
         timestamp = datetime.now().strftime('%m%d%Y_%I%M')
-        filename = '{} - {}'.format(source_filename, timestamp)
+        filename = '%s' % source_filename
 
     key = '%s/%s' % (upload_to, filename)
     bucket_url = 'https://%s/%s' % (endpoint, bucket)
