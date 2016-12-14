@@ -7,6 +7,9 @@ from base64 import b64encode
 
 from django.conf import settings
 
+import logging as log
+logging = log.getLogger(__name__)
+
 
 S3DIRECT_UNIQUE_RENAME = getattr(settings, 'S3DIRECT_UNIQUE_RENAME', None)
 S3DIRECT_FILE_PERMISSION = getattr(settings, 'S3DIRECT_FILE_PERMISSION', "public-read")
@@ -62,7 +65,7 @@ def create_upload_data(content_type, source_filename, upload_to):
     key = '%s/%s' % (upload_to, filename)
     bucket_url = 'https://%s/%s' % (endpoint, bucket)
     
-    print '[django-s3direct] create_upload_data {}'.format(key)
+    logging.debug('[django-s3direct] create_upload_data {}'.format(key))
     return {
         "policy": policy.decode(),
         "signature": signature_b64.decode(),
