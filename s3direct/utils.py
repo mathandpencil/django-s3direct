@@ -58,10 +58,10 @@ def create_upload_data(content_type, source_filename, upload_to):
     ext = source_filename.split('.')[-1]
     if S3DIRECT_UNIQUE_RENAME:
         filename = '%s.%s' % (uuid.uuid4(), ext)
-        print 'YsdfsafsdfasfsafdsaA',filename
     else:
         timestamp = datetime.now().strftime('%m%d%Y_%I%M')
-        namelist = source_filename.replace('.', '-').replace(' ', '-')[:-1]
+        namelist = source_filename.split('.')[:-1]
+        namelist.append(timestamp)
         fname = '-'.join(namelist)
         filename = '%s.%s' % (fname, ext)
 
