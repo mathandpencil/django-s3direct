@@ -56,9 +56,10 @@ def create_upload_data(content_type, source_filename, upload_to):
     signature_b64 = b64encode(signature)
     
     ext = source_filename.split('.')[-1]
+    print 'KDSFJKALSDJFKLDSAJFLSKDAJ'
     if S3DIRECT_UNIQUE_RENAME:
         filename = '%s.%s' % (uuid.uuid4(), ext)
-    else:        
+    else:
         timestamp = datetime.now().strftime('%m%d%Y_%I%M')
         namelist = source_filename.replace('.', '-').replace(' ', '-')[:-1]
         fname = '-'.join(namelist)
