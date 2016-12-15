@@ -19,5 +19,6 @@ def get_upload_params(request):
     content_type = request.POST['type']
     source_filename = request.POST['name']
     upload_to = request.POST['upload_to']
+    print 'source_filename', source_filename
     data = create_upload_data(content_type, source_filename, upload_to)
     return HttpResponse(json.dumps(data), content_type="application/json")
