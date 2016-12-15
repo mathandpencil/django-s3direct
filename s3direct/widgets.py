@@ -50,6 +50,7 @@ class S3DirectWidget(widgets.TextInput):
 		file_name = os.path.basename(value or '')
 		key = '%s/%s' % (self.upload_to, file_name)
 		
+		print key
 		print 'attrs', attrs
 		print 'name', name
 		print 'value', value
