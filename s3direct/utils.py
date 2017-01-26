@@ -65,6 +65,7 @@ def create_upload_data(content_type, source_filename, upload_to):
         namelist.append(timestamp)
         fname = '-'.join(namelist)
         filename = '%s.%s' % (fname, ext)
+        filename = filename.replace(' ', '+')
 
     key = '%s/%s' % (upload_to, filename)
     bucket_url = 'https://%s/%s' % (endpoint, bucket)
