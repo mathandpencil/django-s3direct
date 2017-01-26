@@ -63,8 +63,7 @@ def create_upload_data(content_type, source_filename, upload_to):
         timestamp = datetime.now().strftime('%m%d%Y_%I%M')
         namelist = source_filename.split('.')[:-1]
         namelist.append(timestamp)
-        fname = urllib.urlencode('-'.join(namelist))
-        #fname = urllib.urlencode(fname)
+        fname = '-'.join(namelist)
         filename = '%s.%s' % (fname, ext)
 
     key = '%s/%s' % (upload_to, filename)
