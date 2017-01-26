@@ -2,6 +2,7 @@ import hashlib
 import uuid
 import hmac
 import json
+import urllib
 from datetime import datetime, timedelta
 from base64 import b64encode
 
@@ -54,7 +55,7 @@ def create_upload_data(content_type, source_filename, upload_to):
         secret_access_key.encode(), policy, hashlib.sha1).digest()
 
     signature_b64 = b64encode(signature)
-    
+
     ext = source_filename.split('.')[-1]
     if S3DIRECT_UNIQUE_RENAME:
         filename = '%s.%s' % (uuid.uuid4(), ext)
@@ -62,12 +63,12 @@ def create_upload_data(content_type, source_filename, upload_to):
         timestamp = datetime.now().strftime('%m%d%Y_%I%M')
         namelist = source_filename.split('.')[:-1]
         namelist.append(timestamp)
-        fname = '-'.join(namelist)
+        fname = urllib.quote('-'.join(namelist))
         filename = '%s.%s' % (fname, ext)
 
     key = '%s/%s' % (upload_to, filename)
     bucket_url = 'https://%s/%s' % (endpoint, bucket)
-    
+
     logging.debug('[django-s3direct] create_upload_data {}'.format(key))
     return {
         "policy": policy.decode(),
